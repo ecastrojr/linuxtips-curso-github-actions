@@ -1,7 +1,7 @@
 name: Primeiro Workflow
 
 on:
-  workflow_dipatch
+  workflow_dispatch
 
 jobs:
   giropops:

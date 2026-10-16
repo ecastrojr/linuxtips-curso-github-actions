@@ -33,13 +33,7 @@ jobs:
           path: mensagem.txt
       
       - name: Ver o conteudo do diretorio
-        run: ls -lah && ls ./strigus/
+        run: ls -lah && pwd
         
-      - name: Mover arquivos
-        run: mv strigus/mensagem.txt . $$ rm -rf ./strigus
-
-      - name: Ver o conteudo do diretorio
-        run: ls -lah
-
       - name: Le conteudo do arquivo
         run: cat mensagem.txt

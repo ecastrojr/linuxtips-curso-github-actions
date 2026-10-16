@@ -1,9 +1,7 @@
 name: Vendo arquivos compartilhados entre Steps
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch
 
 jobs:
   entre-steps:
@@ -16,7 +14,7 @@ jobs:
         run: echo "Github Actions" > mensagem.txt
 
       - name: Qualquer outra coisa
-        run: ls -lah
+        run: pwd && ls -lah
 
       - name: Le conteudo do arquivo
         run: cat mensagem.txt

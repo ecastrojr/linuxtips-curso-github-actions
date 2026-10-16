@@ -6,11 +6,17 @@ on:
       - main
 
 jobs:
-  giropops:
+  2giropops2:
     runs-on: ubuntu-latest
     steps:
       - name: Confere versao do Ubuntu
         run: cat /etc/os-release
 
       - name: Exibir uma mensagem
-        run: echo "Github Actions"
+        run: echo "Github Actions" > mensagem.txt
+
+      - name: Qualquer outra coisa
+        run: ls -lah
+
+      - name: Le conteudo do arquivo
+        run: cat mensagem.txt

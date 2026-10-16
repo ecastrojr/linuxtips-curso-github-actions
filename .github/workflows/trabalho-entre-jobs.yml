@@ -13,27 +13,36 @@ jobs:
         run: cat /etc/os-release
 
       - name: Exibir uma mensagem
-        run: echo "Github Actions" > mensagem.txt
+        run: echo "Github Actions" > ${{ github.workspace }}/mensagem.txt
 
       - name: Ver o conteudo do diretorio
         run: pwd && ls -lah
       
       - uses: actions/upload-artifact@v4
         with:
-          name: strigus
-          path: mensagem.txt
+          name: strigus-upload
+          path: ${{ github.workspace }}/mensagem.txt
 
   job_2:
     runs-on: ubuntu-latest
     needs: job_1
     steps:
+      - name: Ver o conteudo do diretorio
+        run: ls -lah && pwd 
+      
       - uses: actions/download-artifact@v4
         with:
-          name: strigus
-          path: mensagem.txt
+          name: strigus-upload
+          path: strigus
       
       - name: Ver o conteudo do diretorio
-        run: ls -lah && pwd
+        run: ls -lah && pwd && ls -lah ./strigus/
+
+      - name: Move e remove
+        run: mv strigus/mensagem.txt . && rm -rf .strigus
+        
+      - name: Ver o conteudo do diretorio
+        run: ls -lah  
         
       - name: Le conteudo do arquivo
         run: cat mensagem.txt

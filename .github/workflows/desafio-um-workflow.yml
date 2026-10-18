@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Recebe nome da imagem
-        run: echo "Vamos testar a imagem: ${{ inputs.imagem }}"
+        run: 'echo "Vamos testar a imagem: ${{ inputs.imagem }}"'
 
       - name: Download da imagem
         run: docker pull ${{ inputs.imagem }}

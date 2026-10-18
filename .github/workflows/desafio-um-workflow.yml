@@ -1,0 +1,32 @@
+name: Desafio 1 Workflow
+
+on:
+  workflow_dispatch
+    inputs:
+      imagem:
+        description: "Imagem a ser testada:"
+        required: true
+        type: string
+
+jobs:
+  Teste:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recebe nome da imagem
+        run: echo "Vamos testar a imagem: ${{ inputs.imagem }}"
+
+      - name: Download da imagem
+        run: docker pull ${{ inputs.imagem }}
+
+      - name: Lista a imagem disponivel
+        run: docker images
+
+        - name: Docker Scout
+          id: docker-scout
+          uses: docker/scout-action@v1
+          with:
+            command: cves,recommendations,compare
+            to-latest: true
+            ignore-base: true
+            ignore-unchanged: true
+            only-fixed: true

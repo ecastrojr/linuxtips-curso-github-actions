@@ -1,8 +1,8 @@
 name: Desafio um Workflow
 
 on:
-  push:
-    branches: [desafio-um]
+#  push:
+#    branches: [desafio-um]
   workflow_dispatch:
     inputs:
       imagem:
@@ -17,13 +17,13 @@ jobs:
       IMAGEM: ${{ inputs.imagem || 'nginx:1.25' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Recebe nome da imagem
+      - name: Recebe o nome da imagem
         run: 'echo "Vamos testar a imagem: ${{ env.IMAGEM }}"'
 
       - name: Download da imagem
         run: docker pull ${{ env.IMAGEM }}
 
-      - name: Lista a imagem disponivel
+      - name: Lista as imagens disponiveis
         run: docker images
 
       - name: Login no Docker Hub

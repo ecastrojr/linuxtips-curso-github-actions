@@ -1,12 +1,15 @@
 name: Desafio um Workflow
 
 on:
+  push:
+    branches: [desafio-um]
   workflow_dispatch:
     inputs:
       imagem:
         description: "Imagem a ser testada:"
         required: true
         type: string
+        default: "nginx:1.25"
 
 jobs:
   Teste:

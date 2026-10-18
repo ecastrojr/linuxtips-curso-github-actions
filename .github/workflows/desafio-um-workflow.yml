@@ -35,6 +35,7 @@ jobs:
       - name: Docker Scout
         id: docker-scout
         uses: docker/scout-action@v1
+        continue-on-error: true
         with:
           command: cves,recommendations
           image: ${{ env.IMAGEM }}

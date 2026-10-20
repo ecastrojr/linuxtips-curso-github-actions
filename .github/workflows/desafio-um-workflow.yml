@@ -1,0 +1,41 @@
+name: Desafio um Workflow
+
+on:
+#  push:
+#    branches: [desafio-um]
+  workflow_dispatch:
+    inputs:
+      imagem:
+        description: "Imagem a ser testada:"
+        required: true
+        type: string
+        default: "nginx:1.25"
+
+jobs:
+  Teste:
+    env:
+      IMAGEM: ${{ inputs.imagem || 'nginx:1.25' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recebe o nome da imagem
+        run: 'echo "Vamos testar a imagem: ${{ env.IMAGEM }}"'
+
+      - name: Download da imagem
+        run: docker pull ${{ env.IMAGEM }}
+
+      - name: Lista as imagens disponiveis
+        run: docker images
+
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PAT }}
+
+      - name: Docker Scout
+        id: docker-scout
+        uses: docker/scout-action@v1
+        continue-on-error: true
+        with:
+          command: cves,recommendations
+          image: ${{ env.IMAGEM }}
